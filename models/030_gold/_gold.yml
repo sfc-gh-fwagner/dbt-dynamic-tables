@@ -1,0 +1,58 @@
+version: 2
+
+models:
+  # --- Dimensions ---
+  - name: dim_customers
+    description: "Gold: customer dimension with lifetime order history."
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+  - name: dim_suppliers
+    description: "Gold: supplier dimension with geography."
+    columns:
+      - name: supplier_key
+        tests:
+          - unique
+          - not_null
+  - name: dim_parts
+    description: "Gold: part dimension with supplier availability and cost summary."
+    columns:
+      - name: part_key
+        tests:
+          - unique
+          - not_null
+  - name: dim_nations
+    description: "Gold: nation dimension with region context."
+    columns:
+      - name: nation_key
+        tests:
+          - unique
+          - not_null
+  - name: dim_regions
+    description: "Gold: region dimension."
+    columns:
+      - name: region_key
+        tests:
+          - unique
+          - not_null
+
+  # --- Facts ---
+  - name: fct_orders
+    description: "Gold: order-grain fact table with financial metrics aggregated from line items."
+    columns:
+      - name: order_key
+        tests:
+          - unique
+          - not_null
+  - name: fct_line_items
+    description: "Gold: line-item grain fact table with pricing and shipping metrics."
+
+  # --- One-big-table and aggregates ---
+  - name: obt_order_summary
+    description: "Gold: one-big-table denormalizing orders with customer attributes for BI."
+  - name: agg_revenue_by_nation
+    description: "Gold: revenue rolled up by nation and region."
+  - name: agg_top_customers
+    description: "Gold: customers ranked by total spend."

@@ -1,0 +1,10 @@
+DBT_DYNAMIC_TABLES_DEMO:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: ACCOUNTADMIN
+      warehouse: ADAPT_WH
+      database: DBT_DYNAMIC_TABLES
+      schema: PUBLIC
+      threads: 4

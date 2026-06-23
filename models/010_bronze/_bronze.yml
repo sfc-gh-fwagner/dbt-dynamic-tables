@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: "Bronze: cleaned customer records from TPC-H."
+    columns:
+      - name: customer_key
+        description: "Primary key for a customer."
+        tests:
+          - unique
+          - not_null
+  - name: stg_orders
+    description: "Bronze: cleaned order headers from TPC-H."
+    columns:
+      - name: order_key
+        description: "Primary key for an order."
+        tests:
+          - unique
+          - not_null
+  - name: stg_lineitems
+    description: "Bronze: cleaned order line items from TPC-H."
+  - name: stg_parts
+    description: "Bronze: cleaned part catalog from TPC-H."
+    columns:
+      - name: part_key
+        tests:
+          - unique
+          - not_null
+  - name: stg_suppliers
+    description: "Bronze: cleaned supplier records from TPC-H."
+    columns:
+      - name: supplier_key
+        tests:
+          - unique
+          - not_null
+  - name: stg_partsupp
+    description: "Bronze: part-supplier availability and cost from TPC-H."
+  - name: stg_nations
+    description: "Bronze: nation reference data from TPC-H."
+    columns:
+      - name: nation_key
+        tests:
+          - unique
+          - not_null
+  - name: stg_regions
+    description: "Bronze: region reference data from TPC-H."
+    columns:
+      - name: region_key
+        tests:
+          - unique
+          - not_null

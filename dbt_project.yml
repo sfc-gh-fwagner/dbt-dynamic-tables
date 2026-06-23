@@ -1,0 +1,35 @@
+name: DBT_DYNAMIC_TABLES_DEMO
+version: 1.0.0
+config-version: 2
+profile: DBT_DYNAMIC_TABLES_DEMO
+model-paths:
+  - models
+analysis-paths:
+  - analyses
+test-paths:
+  - tests
+seed-paths:
+  - seeds
+macro-paths:
+  - macros
+snapshot-paths:
+  - snapshots
+
+models:
+  DBT_DYNAMIC_TABLES_DEMO:
+    +materialized: dynamic_table
+    +target_lag: downstream
+    +snowflake_warehouse: ADAPT_WH
+    010_bronze:
+      +materialized: view
+      +schema: BRONZE
+    020_silver:
+      +materialized: dynamic_table
+      +target_lag: downstream
+      +snowflake_warehouse: ADAPT_WH
+      +schema: SILVER
+    030_gold:
+      +materialized: dynamic_table
+      +target_lag: downstream
+      +snowflake_warehouse: ADAPT_WH
+      +schema: GOLD

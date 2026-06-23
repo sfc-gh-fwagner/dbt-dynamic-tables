@@ -1,0 +1,15 @@
+version: 2
+
+sources:
+  - name: tpch
+    database: DBT_DYNAMIC_TABLES
+    schema: TPCH_SF1
+    tables:
+      - name: CUSTOMER
+      - name: ORDERS
+      - name: LINEITEM
+      - name: PART
+      - name: PARTSUPP
+      - name: SUPPLIER
+      - name: NATION
+      - name: REGION

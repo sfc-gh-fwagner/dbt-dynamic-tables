@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  # --- Entity cleanup models (one per source table) ---
+  - name: int_regions
+    description: "Silver: cleaned region reference data with standardized text."
+    columns:
+      - name: region_key
+        tests:
+          - unique
+          - not_null
+  - name: int_nations
+    description: "Silver: cleaned nation reference data enriched with region name."
+    columns:
+      - name: nation_key
+        tests:
+          - unique
+          - not_null
+  - name: int_customers
+    description: "Silver: cleaned customers enriched with nation and region."
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+  - name: int_suppliers
+    description: "Silver: cleaned suppliers enriched with nation and region."
+    columns:
+      - name: supplier_key
+        tests:
+          - unique
+          - not_null
+  - name: int_parts
+    description: "Silver: cleaned part catalog with standardized text and size buckets."
+    columns:
+      - name: part_key
+        tests:
+          - unique
+          - not_null
+  - name: int_partsupp
+    description: "Silver: cleaned part-supplier availability and cost."
+  - name: int_orders
+    description: "Silver: cleaned orders with derived date parts and status flags."
+    columns:
+      - name: order_key
+        tests:
+          - unique
+          - not_null
+  - name: int_lineitems
+    description: "Silver: cleaned line items with computed pricing and shipping lag."
+
+  # --- Enriched/joined models feeding the gold layer ---
+  - name: int_order_items
+    description: "Silver: line items joined to order context with computed pricing."
+  - name: int_customer_orders
+    description: "Silver: per-customer order rollup enriched with nation and region."
+    columns:
+      - name: customer_key
+        tests:
+          - unique
+          - not_null
+  - name: int_part_suppliers
+    description: "Silver: part-supplier records enriched with part, supplier, and geography."
